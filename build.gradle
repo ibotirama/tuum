@@ -29,6 +29,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // SpringDoc - OpenApi
     implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.7'
+    // Liquibase db migrations
+    implementation 'org.liquibase:liquibase-core'
 }
 
 tasks.named('test') {
