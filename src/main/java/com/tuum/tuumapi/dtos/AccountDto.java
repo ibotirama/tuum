@@ -10,8 +10,9 @@ import java.util.Set;
 @Builder
 @Data
 public class AccountDto {
+    private String accountId;
     @NotBlank
-    private Long customerID;
+    private Long customerId;
     @Max(value = 2)
     private String country;
     private Set<CurrencyDto> currencies;
