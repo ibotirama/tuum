@@ -1,0 +1,33 @@
+databaseChangeLog:
+    -   changeSet:
+            id: create-account-currency-table
+            author: Pedro Andrade
+            changes:
+                -   createTable:
+                        tableName: account_currency
+                        columns:
+                            -   column:
+                                    name: account_id
+                                    type: char(36)
+                                    constraints:
+                                        primaryKey: true
+                                        nullable: false
+                            -   column:
+                                    name: currency_code
+                                    type: varchar(3)
+                                    constraints:
+                                        primaryKey: true
+                                        nullable: false
+                            -   column:
+                                    name: total
+                                    type: money
+                                    constraints:
+                                        nullable: false
+                -   addForeignKeyConstraint:
+                        constraintName: account_currency_account_fk
+                        baseColumnNames: account_id
+                        baseTableName: account_currency
+                        onDelete: RESTRICT
+                        onUpdate: RESTRICT
+                        referencedColumnNames: account_id
+                        referencedTableName: account

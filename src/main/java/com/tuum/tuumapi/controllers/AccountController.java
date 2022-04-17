@@ -28,7 +28,7 @@ public class AccountController {
         AccountDto accountDto = AccountDto.builder()
             .accountId("MYACC01")
             .country("EE")
-            .customerId(1L)
+            .customerId("EE112323123123")
             .currencies(Set.of(new CurrencyDto("EUR", BigDecimal.valueOf(100.0))))
             .build();
         return ResponseEntity.ok(accountDto);

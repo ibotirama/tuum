@@ -1,0 +1,37 @@
+databaseChangeLog:
+    -   changeSet:
+            id: create-account-table
+            author: Pedro Andrade
+            changes:
+                -   createTable:
+                        tableName: account
+                        columns:
+                            -   column:
+                                    name: account_id
+                                    type: char(36)
+                                    constraints:
+                                        primaryKey: true
+                                        nullable: false
+                            -   column:
+                                    name: account_number
+                                    type: varchar(255)
+                                    constraints:
+                                        nullable: false
+                            -   column:
+                                    name: customer_id
+                                    type: char(36)
+                                    constraints:
+                                        nullable: false
+                            -   column:
+                                    name: country
+                                    type: varchar(3)
+                                    constraints:
+                                        nullable: false
+                -   addForeignKeyConstraint:
+                        constraintName: account_customer_fk
+                        baseColumnNames: customer_id
+                        baseTableName: account
+                        onDelete: RESTRICT
+                        onUpdate: RESTRICT
+                        referencedColumnNames: customer_id
+                        referencedTableName: customer

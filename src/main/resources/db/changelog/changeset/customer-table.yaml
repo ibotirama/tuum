@@ -8,8 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: customer_id
-                  type: bigint
-                  autoIncrement: true
+                  type: char(36)
                   constraints:
                     primaryKey: true
                     nullable: false
