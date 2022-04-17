@@ -11,7 +11,6 @@ import java.util.Set;
 @Builder
 public class Account {
     private String accountId;
-    private String accountNumber;
     private String customerId;
     private String country;
     private Set<Balance> currencies;

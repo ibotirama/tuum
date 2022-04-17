@@ -11,8 +11,6 @@ import java.util.Set;
 @Data
 public class AccountRequestDto {
     @NotBlank
-    private String accountNumber;
-    @NotBlank
     private String customerId;
     @Size(min = 3, max = 3)
     @NotBlank

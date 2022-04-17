@@ -1,0 +1,8 @@
+databaseChangeLog:
+    -   changeSet:
+            id: drop-account-number-table
+            author: Pedro Andrade
+            changes:
+                -   dropColumn:
+                        tableName: account
+                        columnName: account_number

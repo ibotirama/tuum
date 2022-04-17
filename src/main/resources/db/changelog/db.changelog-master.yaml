@@ -5,3 +5,5 @@ databaseChangeLog:
         file: db/changelog/changeset/account-table.yaml
   - include:
         file: db/changelog/changeset/account-balance-table.yaml
+  - include:
+        file: db/changelog/changeset/drop-account-number.yaml

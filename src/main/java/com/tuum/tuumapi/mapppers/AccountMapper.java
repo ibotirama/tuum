@@ -15,6 +15,6 @@ public interface AccountMapper {
     @Select("select * from account where account_id = #{id}")
     Account findById(String id);
 
-    @Insert("insert into account(account_id, account_number, customer_id, country) values (#{accountId}, #{accountNumber}, #{customerId}, #{country})")
+    @Insert("insert into account(account_id, customer_id, country) values (#{accountId}, #{customerId}, #{country})")
     void create(Account account);
 }

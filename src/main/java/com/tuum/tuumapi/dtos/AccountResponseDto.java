@@ -10,7 +10,7 @@ import java.util.Set;
 @Builder
 @Data
 public class AccountResponseDto {
-    private String accountNumber;
+    private String accountId;
     @NotBlank
     private String customerId;
     @Size(min = 3, max = 3)

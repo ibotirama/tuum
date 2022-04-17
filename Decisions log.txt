@@ -1,0 +1,19 @@
+- Use open-api to have proper documentation, can be used with other tools that can read the api definition and also generate boilerplate code, what helps to maintain the api.
+- Just for a matter of simplicity I decided to not generate the API based on the openapi specification but just generate the documentation based on the code. - https://www.baeldung.com/spring-rest-openapi-documentation
+- I am using DTO on the just because I don't want to expose my domain objects and avoid to leak any critical info from the domain.
+- For not let the coverage just be on the IDE I decided to use the Jacoco plugin and also configured a verification of the 80% min limit - https://docs.gradle.org/current/userguide/jacoco_plugin.html
+- Remove the configurations from the gradle config also from the application.properties and put into env variables\
+- Decide to enhance the db through the migrations just to have it in an increment and better documented way.
+- Choose Liquibase instead of the flyway because it is more db agnostic and we don't need to pay too much attention to the SQL syntax details.
+- Use UUID as an external id just for not expose via url any internal data.
+- Just for the sake of simplicity I will not use a ExceptionHander
+
+
+- Codegen - https://www.baeldung.com/java-openapi-generator-server
+            https://openapi-generator.tech/docs/plugins/#!
+
+
+https://spring.io/guides/gs/messaging-rabbitmq/
+https://x-team.com/blog/set-up-rabbitmq-with-docker-compose/
+
+https://spring.io/guides/gs/testing-restdocs/
