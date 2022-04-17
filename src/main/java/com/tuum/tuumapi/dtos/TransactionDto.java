@@ -1,6 +1,6 @@
 package com.tuum.tuumapi.dtos;
 
-import com.tuum.tuumapi.domain.TransactionDirection;
+import com.tuum.tuumapi.model.TransactionDirection;
 import lombok.Builder;
 import lombok.Data;
 

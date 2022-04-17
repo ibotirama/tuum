@@ -9,12 +9,12 @@ import java.util.Set;
 
 @Builder
 @Data
-public class AccountDto {
-    private String accountId;
+public class AccountResponseDto {
+    private String accountNumber;
     @NotBlank
     private String customerId;
     @Size(min = 3, max = 3)
     @NotBlank
     private String country;
-    private Set<CurrencyDto> currencies;
+    private Set<CurrencyResponseDto> currencies;
 }

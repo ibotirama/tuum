@@ -1,10 +1,10 @@
 databaseChangeLog:
     -   changeSet:
-            id: create-account-currency-table
+            id: create-account-balance-table
             author: Pedro Andrade
             changes:
                 -   createTable:
-                        tableName: account_currency
+                        tableName: account_balance
                         columns:
                             -   column:
                                     name: account_id
@@ -19,14 +19,14 @@ databaseChangeLog:
                                         primaryKey: true
                                         nullable: false
                             -   column:
-                                    name: total
+                                    name: amount
                                     type: money
                                     constraints:
                                         nullable: false
                 -   addForeignKeyConstraint:
-                        constraintName: account_currency_account_fk
+                        constraintName: account_balance_account_fk
                         baseColumnNames: account_id
-                        baseTableName: account_currency
+                        baseTableName: account_balance
                         onDelete: RESTRICT
                         onUpdate: RESTRICT
                         referencedColumnNames: account_id

@@ -1,6 +1,6 @@
 package com.tuum.tuumapi.controllers;
 
-import com.tuum.tuumapi.domain.TransactionDirection;
+import com.tuum.tuumapi.model.TransactionDirection;
 import com.tuum.tuumapi.dtos.TransactionDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

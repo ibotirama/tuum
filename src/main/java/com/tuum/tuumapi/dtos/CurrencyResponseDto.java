@@ -1,6 +1,7 @@
 package com.tuum.tuumapi.dtos;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -9,7 +10,8 @@ import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
-public class CurrencyDto {
+@Builder
+public class CurrencyResponseDto {
     @Size(min = 3, max = 3)
     @NotBlank
     private String currencyCode;

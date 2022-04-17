@@ -1,3 +1,3 @@
-package com.tuum.tuumapi.domain;
+package com.tuum.tuumapi.model;
 
 public enum TransactionDirection { IN, OUT }
