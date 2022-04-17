@@ -2,6 +2,7 @@ package com.tuum.tuumapi.controllers;
 
 import com.tuum.tuumapi.dtos.AccountRequestDto;
 import com.tuum.tuumapi.dtos.AccountResponseDto;
+import com.tuum.tuumapi.exceptions.InvalidCurrencyException;
 import com.tuum.tuumapi.services.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,10 +33,10 @@ public class AccountController {
         try {
             AccountResponseDto responseDto = accountService.create(accountDto);
             return ResponseEntity.ok(responseDto);
-        }
-        catch(Exception ex) {
-            String msg = "Error trying to create an account. /n" + ex.getMessage();
-            log.error(msg);
+        } catch (InvalidCurrencyException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return ResponseEntity.badRequest().body("Error trying to create Account");
         }
     }
