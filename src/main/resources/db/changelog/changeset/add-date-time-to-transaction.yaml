@@ -1,0 +1,16 @@
+databaseChangeLog:
+    -   changeSet:
+            id: add-date-time-to-transaction-table
+            author: Pedro Andrade
+            changes:
+                -   addColumn:
+                        tableName: transaction
+                        columns:
+                            - column:
+                                  name: transaction_time
+                                  type: timestamp
+                - addDefaultValue:
+                    tableName: transaction
+                    columnName: transaction_time
+                    defaultValueComputed: now
+

@@ -16,14 +16,16 @@ import java.util.stream.Collectors;
 public class AccountConverter {
 
     public Account convertToEntity(AccountRequestDto accountDto) {
+        String accountId = UUID.randomUUID().toString();
         Set<Balance> currencySet = accountDto.getCurrencies().stream().map(curr ->
                 Balance.builder()
+                    .accountId(accountId)
                     .currencyCode(curr.getCurrencyCode())
                     .amount(BigDecimal.ZERO)
                     .build())
             .collect(Collectors.toSet());
         return Account.builder()
-            .accountId(UUID.randomUUID().toString())
+            .accountId(accountId)
             .customerId(accountDto.getCustomerId())
             .country(accountDto.getCountry())
             .currencies(currencySet)

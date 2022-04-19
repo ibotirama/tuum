@@ -1,0 +1,52 @@
+databaseChangeLog:
+    -   changeSet:
+            id: create-transaction-table
+            author: Pedro Andrade
+            changes:
+                -   createTable:
+                        tableName: transaction
+                        columns:
+                            -   column:
+                                    name: transaction_id
+                                    type: char(36)
+                                    constraints:
+                                        primaryKey: true
+                                        nullable: false
+                            -   column:
+                                    name: account_id
+                                    type: char(36)
+                                    constraints:
+                                        nullable: false
+                            -   column:
+                                    name: amount
+                                    type: money
+                                    constraints:
+                                        nullable: false
+                            -   column:
+                                    name: currency_code
+                                    type: varchar(3)
+                                    constraints:
+                                        nullable: false
+                            -   column:
+                                    name: direction
+                                    type: char(3)
+                                    constraints:
+                                        nullable: false
+                            -   column:
+                                    name: description
+                                    type: varchar(255)
+                                    constraints:
+                                        nullable: false
+                            -   column:
+                                    name: balance
+                                    type: money
+                                    constraints:
+                                        nullable: false
+                -   addForeignKeyConstraint:
+                        constraintName: transaction_account_fk
+                        baseColumnNames: account_id
+                        baseTableName: account
+                        onDelete: RESTRICT
+                        onUpdate: RESTRICT
+                        referencedColumnNames: account_id
+                        referencedTableName: account

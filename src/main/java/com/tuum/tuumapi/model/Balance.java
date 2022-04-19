@@ -24,7 +24,7 @@ public class Balance {
     private void validateCurrencyCode(String currencyCode) {
         String[] valids = {"EUR", "SEK", "GBP", "USD"};
         if (!Arrays.asList(valids).contains(currencyCode)) {
-            throw new InvalidCurrencyException();
+            throw new InvalidCurrencyException(currencyCode);
         }
     }
 }
