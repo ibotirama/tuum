@@ -117,6 +117,7 @@ class AccountControllerTest {
         // when
         mockMvc.perform(post("/account-service")
                 .content(objectMapper.writeValueAsString(requestDto))
+                .contentType(MediaType.APPLICATION_JSON)
             )
             // then
             .andExpect(status().is4xxClientError());

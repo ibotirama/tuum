@@ -1,0 +1,15 @@
+databaseChangeLog:
+    -   changeSet:
+            id: add-default-customer
+            author: Pedro Andrade
+            changes:
+                - insert:
+                      tableName: customer
+                      columns:
+                          - column:
+                                name: customer_id
+                                value: "b320dfbb-2c63-436d-8657-cef33e746dda"
+                          - column:
+                                name: name
+                                value: "Default customer"
+

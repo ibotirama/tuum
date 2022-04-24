@@ -7,3 +7,5 @@ databaseChangeLog:
         file: db/changelog/changeset/account-balance-table.yaml
   - include:
         file: db/changelog/changeset/transaction-table.yaml
+  - include:
+        file: db/changelog/changeset/add-default-customer.yaml
