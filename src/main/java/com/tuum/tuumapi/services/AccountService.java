@@ -7,19 +7,23 @@ import com.tuum.tuumapi.mapppers.AccountMapper;
 import com.tuum.tuumapi.mapppers.BalanceMapper;
 import com.tuum.tuumapi.model.Account;
 import com.tuum.tuumapi.model.Balance;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
 @Service
-@AllArgsConstructor
 public class AccountService {
 
     private final AccountMapper accountMapper;
     private final AccountConverter converter;
     private final BalanceMapper balanceMapper;
+
+    public AccountService(AccountMapper accountMapper, AccountConverter converter, BalanceMapper balanceMapper) {
+        this.accountMapper = accountMapper;
+        this.converter = converter;
+        this.balanceMapper = balanceMapper;
+    }
 
     @Transactional
     public AccountResponseDto create(AccountRequestDto accountDto){

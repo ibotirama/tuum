@@ -3,6 +3,7 @@ package com.tuum.tuumapi.services;
 import com.tuum.tuumapi.conveters.TransactionConverter;
 import com.tuum.tuumapi.dtos.TransactionRequestDto;
 import com.tuum.tuumapi.dtos.TransactionResponseDto;
+import com.tuum.tuumapi.exceptions.InsuficientFoundsException;
 import com.tuum.tuumapi.exceptions.InvalidAccountException;
 import com.tuum.tuumapi.mapppers.AccountMapper;
 import com.tuum.tuumapi.mapppers.BalanceMapper;
@@ -28,8 +29,11 @@ public class TransactionService {
     public TransactionResponseDto create(TransactionRequestDto transactionDto) {
         BigDecimal balance = balanceMapper.getBalanceBy(transactionDto.getAccountId(), transactionDto.getCurrency());
         Transaction transaction = converter.convertToEntity(transactionDto);
-        transaction.setBalance(balance);
         BigDecimal newValue = transaction.getDirection() == TransactionDirection.IN ? balance.add(transaction.getAmount()) : balance.subtract(transaction.getAmount());
+        transaction.setBalance(newValue);
+        if (newValue.compareTo(BigDecimal.ZERO) < 0){
+            throw new InsuficientFoundsException(transaction.getTransactionId());
+        }
         balanceMapper.updateBalance(transaction.getAccountId(), transaction.getCurrency(), newValue);
         transactionMapper.create(transaction);
         return converter.convertToDto(transaction);
@@ -37,7 +41,7 @@ public class TransactionService {
 
     public List<TransactionResponseDto> findByAccountId(String accountId) {
         List<Transaction> transactions = transactionMapper.findByAccountId(accountId);
-        if (transactions == null){
+       if (transactions == null){
             throw new InvalidAccountException(accountId);
         }
         return transactions.stream().map(converter::convertToDto).collect(Collectors.toList());

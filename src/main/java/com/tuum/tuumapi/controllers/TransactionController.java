@@ -36,18 +36,18 @@ public class TransactionController {
             return ResponseEntity.ok(responseDto);
         } catch (Exception ex) {
             ex.printStackTrace();
-            return ResponseEntity.badRequest().body("Error trying to create Transaction");
+            return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 
     @Operation(summary = "Find the transactions based on the AccountId")
     @GetMapping("/{accountId}")
     public ResponseEntity<?> getTransactions(@PathVariable String accountId) {
-        try {
+//        try {
             List<TransactionResponseDto> transactions = transactionService.findByAccountId(accountId);
             return ResponseEntity.ok(transactions);
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Invalid account");
-        }
+//        } catch (Exception ex) {
+//            return ResponseEntity.badRequest().body(ex.getMessage());
+//        }
     }
 }

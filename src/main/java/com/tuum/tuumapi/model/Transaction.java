@@ -3,6 +3,7 @@ package com.tuum.tuumapi.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.apache.ibatis.annotations.ResultType;
 
 import java.math.BigDecimal;
 import java.util.Set;
