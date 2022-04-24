@@ -1,20 +1,13 @@
 package com.tuum.tuumapi.mapppers;
 
-import java.util.List;
-
 import com.tuum.tuumapi.model.Account;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface AccountMapper {
-    @Select("select * from account")
-    List<Account> findAll();
+    @Select("select a.id, a.customer_id, a.country from ACCOUNT a where a.id = #{accountId}")
+    Account findById(String accountId);
 
-    @Select("select * from account where account_id = #{id}")
-    Account findById(String id);
-
-    @Insert("insert into account(account_id, customer_id, country) values (#{accountId}, #{customerId}, #{country})")
+    @Insert("insert into account(id, customer_id, country) values (#{id}, #{customerId}, #{country})")
     void create(Account account);
 }

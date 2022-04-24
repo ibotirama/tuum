@@ -2,6 +2,7 @@ package com.tuum.tuumapi.controllers;
 
 import com.tuum.tuumapi.dtos.AccountRequestDto;
 import com.tuum.tuumapi.dtos.AccountResponseDto;
+import com.tuum.tuumapi.dtos.CurrencyRequestDto;
 import com.tuum.tuumapi.exceptions.InvalidCurrencyException;
 import com.tuum.tuumapi.services.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 @Slf4j
 @Tag(name = "Account endpoint")
@@ -33,6 +36,7 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<?> createAccount(@RequestBody AccountRequestDto accountDto) {
         try {
+            validade(accountDto);
             AccountResponseDto responseDto = accountService.create(accountDto);
             return ResponseEntity.ok(responseDto);
         } catch (InvalidCurrencyException ex) {
@@ -40,6 +44,15 @@ public class AccountController {
         } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.badRequest().body("Error trying to create Account");
+        }
+    }
+
+    private void validade(AccountRequestDto accountDto) {
+        String[] valids = {"EUR", "SEK", "GBP", "USD"};
+        for(CurrencyRequestDto dto: accountDto.getCurrencies()){
+            if (!Arrays.asList(valids).contains(dto.getCurrencyCode())) {
+                throw new InvalidCurrencyException(dto.getCurrencyCode());
+            }
         }
     }
 

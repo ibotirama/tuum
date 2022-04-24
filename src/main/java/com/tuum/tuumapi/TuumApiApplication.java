@@ -6,12 +6,11 @@ import com.tuum.tuumapi.model.Transaction;
 import com.tuum.tuumapi.model.TransactionDirection;
 import org.apache.ibatis.type.MappedTypes;
 import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @MappedTypes({Account.class, Balance.class, Transaction.class, TransactionDirection.class})
-@MapperScans({@MapperScan("com.tuum.tuumapi.mapppers"), @MapperScan("com.tuum.tuumapi.typehander")})
+@MapperScan("com.tuum.tuumapi.mapppers")
 @SpringBootApplication
 public class TuumApiApplication {
 

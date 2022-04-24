@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Mapper
 public interface BalanceMapper {
@@ -15,6 +16,9 @@ public interface BalanceMapper {
 
     @Select("select sum(ab.amount) from account_balance ab where ab.account_id = #{accountId} and ab.currency_code = #{currencyCode}")
     BigDecimal getBalanceBy(String accountId, String currencyCode);
+
+    @Select("select ab.account_id, ab.currency_code, ab.amount from account_balance ab where ab.account_id = #{accountId}")
+    Set<Balance> getBalancesBy(String accountId);
 
     @Update("update account_balance set amount=#{balance} where account_id = #{accountId} and currency_code = #{currencyCode}")
     void updateBalance(String accountId, String currencyCode, BigDecimal balance);

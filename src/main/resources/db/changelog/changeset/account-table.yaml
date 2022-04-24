@@ -28,5 +28,5 @@ databaseChangeLog:
                         baseTableName: account
                         onDelete: RESTRICT
                         onUpdate: RESTRICT
-                        referencedColumnNames: customer_id
+                        referencedColumnNames: id
                         referencedTableName: customer

@@ -7,7 +7,7 @@ databaseChangeLog:
                         tableName: account_balance
                         columns:
                             -   column:
-                                    name: id
+                                    name: account_id
                                     type: char(36)
                                     constraints:
                                         primaryKey: true
@@ -29,5 +29,5 @@ databaseChangeLog:
                         baseTableName: account_balance
                         onDelete: RESTRICT
                         onUpdate: RESTRICT
-                        referencedColumnNames: account_id
+                        referencedColumnNames: id
                         referencedTableName: account

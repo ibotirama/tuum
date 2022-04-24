@@ -3,6 +3,7 @@ package com.tuum.tuumapi.services;
 import com.tuum.tuumapi.conveters.AccountConverter;
 import com.tuum.tuumapi.dtos.AccountRequestDto;
 import com.tuum.tuumapi.dtos.AccountResponseDto;
+import com.tuum.tuumapi.dtos.CurrencyRequestDto;
 import com.tuum.tuumapi.exceptions.AccountNotFoundException;
 import com.tuum.tuumapi.mapppers.AccountMapper;
 import com.tuum.tuumapi.mapppers.BalanceMapper;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Service
 public class AccountService {
@@ -30,13 +32,14 @@ public class AccountService {
     public AccountResponseDto create(AccountRequestDto accountDto){
         Account account = converter.convertToEntity(accountDto);
         accountMapper.create(account);
-        createCurrenciesPerAccount(account);
-        return converter.convertToResponse(account);
+        createCurrenciesPerAccount(account.getId(), accountDto.getCurrencies());
+        Set<Balance> currencies = balanceMapper.getBalancesBy(account.getId());
+        return converter.convertToResponse(account, currencies);
     }
 
-    private void createCurrenciesPerAccount(Account account) {
-        account.getCurrencies().forEach(curr -> {
-            Balance balance = new Balance(account.getAccountId(), curr.getCurrencyCode(), BigDecimal.ZERO);
+    private void createCurrenciesPerAccount(String accountId, Set<CurrencyRequestDto> currencies) {
+        currencies.forEach(curr -> {
+            Balance balance = new Balance(accountId, curr.getCurrencyCode(), BigDecimal.ZERO);
             balanceMapper.create(balance);
         });
     }
@@ -46,7 +49,8 @@ public class AccountService {
         if (account == null){
             throw new AccountNotFoundException(accountId);
         }
-        return converter.convertToResponse(account);
+        Set<Balance> currencies = balanceMapper.getBalancesBy(account.getId());
+        return converter.convertToResponse(account,currencies);
     }
 
 }

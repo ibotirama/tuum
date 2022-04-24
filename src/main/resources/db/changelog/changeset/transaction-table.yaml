@@ -45,8 +45,8 @@ databaseChangeLog:
                 -   addForeignKeyConstraint:
                         constraintName: transaction_account_fk
                         baseColumnNames: account_id
-                        baseTableName: account
+                        baseTableName: transaction
                         onDelete: RESTRICT
                         onUpdate: RESTRICT
-                        referencedColumnNames: account_id
+                        referencedColumnNames: id
                         referencedTableName: account
