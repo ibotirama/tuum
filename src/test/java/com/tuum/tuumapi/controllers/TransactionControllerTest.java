@@ -1,10 +1,12 @@
 package com.tuum.tuumapi.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tuum.tuumapi.dtos.AccountResponseDto;
 import com.tuum.tuumapi.dtos.TransactionRequestDto;
 import com.tuum.tuumapi.dtos.TransactionResponseDto;
 import com.tuum.tuumapi.exceptions.InsufficientFoundsException;
 import com.tuum.tuumapi.model.TransactionDirection;
+import com.tuum.tuumapi.services.AccountService;
 import com.tuum.tuumapi.services.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -36,10 +38,17 @@ class TransactionControllerTest {
         .direction(TransactionDirection.IN)
         .description("Test")
         .build();
-
+    private final AccountResponseDto accountResponseDto = AccountResponseDto.builder()
+        .accountId("account-id-test")
+        .accountId("account-id-test")
+        .country("EUA").
+        build();
 
     @MockBean
     private TransactionService transactionService;
+
+    @MockBean
+    private AccountService accountService;
 
     @Autowired
     private ObjectMapper mapper;
@@ -57,6 +66,7 @@ class TransactionControllerTest {
             .description("Test")
             .build();
 
+        given(accountService.findById("account-id-test")).willReturn(accountResponseDto);
         given(transactionService.create(requestDto)).willReturn(responseDto);
 
         mockMvc.perform(
@@ -103,7 +113,7 @@ class TransactionControllerTest {
             .description("Test")
             .build();
 
-        given(transactionService.create(requestDto)).willThrow(RuntimeException.class);
+        given(transactionService.create(requestDto)).willThrow(IllegalArgumentException.class);
 
         mockMvc.perform(
                 post("/transaction-service")

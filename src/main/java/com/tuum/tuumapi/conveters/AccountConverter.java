@@ -40,6 +40,7 @@ public class AccountConverter {
                     .build())
             .collect(Collectors.toSet());
         return AccountResponseDto.builder()
+             .accountId(account.getAccountId())
             .customerId(account.getCustomerId())
             .country(account.getCountry())
             .currencies(currencySet)
