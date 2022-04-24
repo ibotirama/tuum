@@ -3,6 +3,7 @@ package com.tuum.tuumapi.services;
 import com.tuum.tuumapi.conveters.AccountConverter;
 import com.tuum.tuumapi.dtos.AccountRequestDto;
 import com.tuum.tuumapi.dtos.AccountResponseDto;
+import com.tuum.tuumapi.exceptions.AccountNotFoundException;
 import com.tuum.tuumapi.mapppers.AccountMapper;
 import com.tuum.tuumapi.mapppers.BalanceMapper;
 import com.tuum.tuumapi.model.Account;
@@ -42,6 +43,9 @@ public class AccountService {
 
     public AccountResponseDto findById(String accountId) {
         Account account = accountMapper.findById(accountId);
+        if (account == null){
+            throw new AccountNotFoundException(accountId);
+        }
         return converter.convertToResponse(account);
     }
 
