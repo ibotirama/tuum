@@ -7,7 +7,7 @@ databaseChangeLog:
                         tableName: account
                         columns:
                             -   column:
-                                    name: account_id
+                                    name: id
                                     type: char(36)
                                     constraints:
                                         primaryKey: true

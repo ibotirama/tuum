@@ -25,7 +25,7 @@ public class AccountConverter {
                     .build())
             .collect(Collectors.toSet());
         return Account.builder()
-            .accountId(accountId)
+            .id(accountId)
             .customerId(accountDto.getCustomerId())
             .country(accountDto.getCountry())
             .currencies(currencySet)
@@ -40,7 +40,7 @@ public class AccountConverter {
                     .build())
             .collect(Collectors.toSet());
         return AccountResponseDto.builder()
-             .accountId(account.getAccountId())
+             .accountId(account.getId())
             .customerId(account.getCustomerId())
             .country(account.getCountry())
             .currencies(currencySet)

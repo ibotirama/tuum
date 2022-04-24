@@ -7,7 +7,7 @@ databaseChangeLog:
                       tableName: customer
                       columns:
                           - column:
-                                name: customer_id
+                                name: id
                                 value: "b320dfbb-2c63-436d-8657-cef33e746dda"
                           - column:
                                 name: name

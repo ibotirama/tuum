@@ -1,33 +1,31 @@
 package com.tuum.tuumapi.conveters;
 
-import com.tuum.tuumapi.dtos.*;
-import com.tuum.tuumapi.model.Account;
-import com.tuum.tuumapi.model.Balance;
+import com.tuum.tuumapi.dtos.TransactionRequestDto;
+import com.tuum.tuumapi.dtos.TransactionResponseDto;
 import com.tuum.tuumapi.model.Transaction;
+import com.tuum.tuumapi.model.TransactionDirection;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class TransactionConverter {
 
     public Transaction convertToEntity(TransactionRequestDto transactionDto) {
+        TransactionDirection direction = TransactionDirection.valueOf(transactionDto.getDirection());
         return Transaction.builder()
-            .transactionId(UUID.randomUUID().toString())
+            .id(UUID.randomUUID().toString())
             .accountId(transactionDto.getAccountId())
             .amount(transactionDto.getAmount())
             .currency(transactionDto.getCurrency())
-            .direction(transactionDto.getDirection())
+            .direction(direction)
             .description(transactionDto.getDescription())
             .build();
     }
 
     public TransactionResponseDto convertToDto(Transaction transaction) {
         return TransactionResponseDto.builder()
-            .transactionId(transaction.getTransactionId())
+            .transactionId(transaction.getId())
             .accountId(transaction.getAccountId())
             .amount(transaction.getAmount())
             .currency(transaction.getCurrency())

@@ -10,7 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class Account {
-    private String accountId;
+    private String id;
     private String customerId;
     private String country;
     private Set<Balance> currencies;
